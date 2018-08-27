@@ -39,6 +39,13 @@ class Index extends Controller {
     
   }
   
+  
+  public function getAllEmployees() {
+    require APP_PATH . '/models/employe.php';
+    return (new EmployeeModel())->getAllEmployes();
+  }
+
+
 }
 
 

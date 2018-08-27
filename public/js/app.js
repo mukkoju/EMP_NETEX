@@ -50,10 +50,55 @@ function PanelController($scope, $mdDialog) {
     };
 }
 
+app.controller('ToastController', ['$scope', '$mdToast',
+    function ($scope, $mdToast) {
+        var last = {
+            bottom: true,
+            top: false,
+            left: true,
+            right: false
+        };
+
+        $scope.tstPos = angular.extend({}, last);
+        $scope.getTstPos = function () {
+            return Object.keys($scope.tstPos)
+                    .filter(function (pos) {
+                        return $scope.tstPos[pos]
+                    })
+                    .join(' ');
+        };
+
+        $scope.showActionToast = function (ctnt, scope) {
+            var par = document.querySelector('body');
+            if (angular.element(par).hasClass('md-dialog-is-showing'))
+                par = document.querySelector('.wrapper');
+            $mdToast.show({
+                hideDelay: 15000,
+                controller: 'ToastController',
+                template: ctnt,
+                scope: scope
+            });
+        };
+
+        $scope.showSimpleToast = function (text) {
+            var par = document.querySelector('body');
+            if (angular.element(par).hasClass('md-dialog-is-showing'))
+                par = document.querySelector('.wrapper');
+
+            $mdToast.show($mdToast.simple().textContent(text)
+                    .position($scope.getTstPos()).hideDelay(4000).parent(par));
+        };
+
+        $scope.cancelToast = function () {
+            $mdToast.hide();
+        };
+    }]);
+
 
 app.controller('IndexController', ['$scope', 'apiService', '$controller', function ($scope, apiService, $controller) {
         $scope.loginFromSubmit = function (isvalid) {
             if (isvalid) {
+                document.location = 'home';
                 apiService.postData({}, 'login').success(function (res) {
                     console.log(res);
                 });
@@ -93,13 +138,15 @@ app.controller('Homecontroller', ['$scope', 'apiService', '$controller', functio
     }]);
 
 app.controller('EmployeeController', ['$scope', 'apiService', '$controller', function ($scope, apiService, $controller) {
+        $controller('ToastController', {$scope: $scope});
+
         $scope.saveEmp = function () {
             apiService.postData({id: $scope.emp.id,
                 name: $scope.emp.name,
                 email: $scope.emp.email,
                 mobile: $scope.emp.mobile
             }, 'saveemp').success(function (res) {
-                alert(res.msg);
+                $scope.showSimpleToast(res.msg);
             });
         };
     }]);

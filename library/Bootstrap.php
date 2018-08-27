@@ -21,9 +21,13 @@ class Bootstrap {
         echo (new Index())->saveEmp($_POST);
         break;
       case 'getallemp':
-        
+        require APP_PATH . '/controllers/index.php';
+        echo (new Index())->saveEmp($_POST);
         break;
       
+      case "login":
+        
+        break;
       case 'getemp':
         
         break;

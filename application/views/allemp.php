@@ -4,7 +4,7 @@
         <tbody>
             <tr>
                 <th scope="col">Employee</th>
-                <th scope="col">Manage</th>
+                <th scope="col">Edit</th>
             </tr>
             <tr ng-repeat="emp in emps">
                 <td>Sathish Kumar Mukkoju</td>
