@@ -26,8 +26,15 @@ class Bootstrap {
         break;
       
       case "login":
-        
+        require APP_PATH . '/controllers/index.php';
+        echo (new Index())->login($_POST);
         break;
+      
+      case "logout":
+        require APP_PATH . '/controllers/index.php';
+        echo (new Index())->logout();
+        break;
+      
       case 'getemp':
         
         break;

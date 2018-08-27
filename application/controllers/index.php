@@ -45,7 +45,19 @@ class Index extends Controller {
     return (new EmployeeModel())->getAllEmployes();
   }
 
-
+  
+  public function login() {
+    require APP_PATH . '/models/employe.php';
+    return (new EmployeeModel())->setsession();
+  }
+  
+  public function logout() {
+    setcookie ('khIntr', '', 0);
+    session_unset();
+    session_destroy();
+    header("Location: /");
+    exit();
+  }
 }
 
 

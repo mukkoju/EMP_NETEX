@@ -96,11 +96,15 @@ app.controller('ToastController', ['$scope', '$mdToast',
 
 
 app.controller('IndexController', ['$scope', 'apiService', '$controller', function ($scope, apiService, $controller) {
-        $scope.loginFromSubmit = function (isvalid) {
+        $controller('ToastController', {$scope: $scope});
+        $scope.loginFromSubmit = function (isvalid, username, password) {
             if (isvalid) {
-                document.location = 'home';
-                apiService.postData({}, 'login').success(function (res) {
-                    console.log(res);
+                apiService.postData({username: username, password: password}, 'login').success(function (res) {
+                    if (res.status == 1) {
+                        document.location = 'home';
+                    } else {
+                        $scope.showSimpleToast(res.msg);
+                    }
                 });
             } else {
                 return false;
