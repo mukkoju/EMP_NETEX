@@ -52,54 +52,54 @@ function PanelController($scope, $mdDialog) {
 
 
 app.controller('IndexController', ['$scope', 'apiService', '$controller', function ($scope, apiService, $controller) {
-    $scope.loginFromSubmit = function (isvalid) {
-        if (isvalid) {
-            apiService.postData({}, 'login').success(function (res) {
-                console.log(res);
-            });
-        } else {
-            return false;
-        }
-    };
-}]);
+        $scope.loginFromSubmit = function (isvalid) {
+            if (isvalid) {
+                apiService.postData({}, 'login').success(function (res) {
+                    console.log(res);
+                });
+            } else {
+                return false;
+            }
+        };
+    }]);
 
 
 app.controller('Homecontroller', ['$scope', 'apiService', '$controller', function ($scope, apiService, $controller) {
-    $controller('DialogController', { $scope: $scope });
-    $scope.emp = {};
-    
-    $scope.updateEmp = function() {
-        
-    };
-    
-    $scope.showEmp = function (tp, id) {
-        if(tp == 'E'){
-            $scope.emp = {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'};
-            apiService.postData({tp: tp, id: id}, 'getemp').success(function(res) {
-            });
-        }
-        $scope.loadDialog('application/views/employee.php');
-    };
-    
-    $scope.allEmp = function() {
-        apiService.postData({}, 'getallemp').success(function(res) {
-            $scope.emps = [{'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'},
-                   {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'},
-                   {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'},
-                   {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'}];
-        });
-        $scope.loadDialog('application/views/allemp.php');
-    };
-}]);
+        $controller('DialogController', {$scope: $scope});
+        $scope.emp = {};
 
-app.controller('EmployeeController', ['$scope', 'apiService', '$controller', function($scope, apiService, $controller) {
-    $scope.saveEmp = function() {
-        apiService.postData({id: $scope.emp.id, 
-                            name: $scope.emp.name,
-                            email: $scope.emp.email,
-                            mobile: $scope.emp.mobile
-        }, 'addemp').success(function(res) {
-            
-        });
-    };
-}]);
+        $scope.updateEmp = function () {
+
+        };
+
+        $scope.showEmp = function (tp, id) {
+            if (tp == 'E') {
+                $scope.emp = {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'};
+                apiService.postData({tp: tp, id: id}, 'getemp').success(function (res) {
+                });
+            }
+            $scope.loadDialog('application/views/employee.php');
+        };
+
+        $scope.allEmp = function () {
+            apiService.postData({}, 'getallemp').success(function (res) {
+                $scope.emps = [{'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'},
+                    {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'},
+                    {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'},
+                    {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'}];
+            });
+            $scope.loadDialog('application/views/allemp.php');
+        };
+    }]);
+
+app.controller('EmployeeController', ['$scope', 'apiService', '$controller', function ($scope, apiService, $controller) {
+        $scope.saveEmp = function () {
+            apiService.postData({id: $scope.emp.id,
+                name: $scope.emp.name,
+                email: $scope.emp.email,
+                mobile: $scope.emp.mobile
+            }, 'saveemp').success(function (res) {
+                alert(res.msg);
+            });
+        };
+    }]);

@@ -16,6 +16,10 @@ class Bootstrap {
         (new Index())->home();
         break;
       
+      case 'saveemp':
+        require APP_PATH . '/controllers/index.php';
+        echo (new Index())->saveEmp($_POST);
+        break;
       case 'getallemp':
         
         break;
