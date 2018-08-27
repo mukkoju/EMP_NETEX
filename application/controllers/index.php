@@ -13,14 +13,25 @@ class Index extends Controller {
   }
   
   public function index() {
-    $this->view->render('index');
+    if(empty($_SESSION['id'])) {
+      $this->view->render('index');
+    } else {
+      header("Location: /home");
+    }
   }
   
   public function home() {
-    $this->view->render('home');
+    if(!empty($_SESSION['id'])) {
+      $this->view->render('home');
+    } else {
+      header("Location: /");
+    }  
   }
   
   public function saveEmp($data) {
+    if(!$this->hasSession())
+      return '{"status": 0, "msg": "session required"}';
+    
     if(empty($data['id']))
       return '{"status": 0, "msg": "Id cannot be empty"}';
     elseif(empty($data['name']))
@@ -41,14 +52,17 @@ class Index extends Controller {
   
   
   public function getAllEmployees() {
+    if(!$this->hasSession())
+      return '{"status": 0, "msg": "session required"}';
+    
     require APP_PATH . '/models/employe.php';
     return (new EmployeeModel())->getAllEmployes();
   }
 
   
-  public function login() {
+  public function login($data) {
     require APP_PATH . '/models/employe.php';
-    return (new EmployeeModel())->setsession();
+    return (new EmployeeModel())->setsession($data['username'], $data['password']);
   }
   
   public function logout() {
@@ -57,6 +71,13 @@ class Index extends Controller {
     session_destroy();
     header("Location: /");
     exit();
+  }
+  
+  public function hasSession() {
+    if(empty($_SESSION['id']))
+      return false;
+    else
+      return true;
   }
 }
 
