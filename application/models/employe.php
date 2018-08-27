@@ -2,12 +2,11 @@
 
 class EmployeeModel {
 
-  
   public function setsession($id, $password) {
     $db = $this->getdb();
-    $tmp = $db->query("SELECT id from emp WHERE id = " . $db->quote($id)." AND password = ".$db->quote($password)."");
+    $tmp = $db->query("SELECT id from emp WHERE id = " . $db->quote($id) . " AND password = " . $db->quote($password) . "");
     $res = $tmp->fetch(PDO::FETCH_ASSOC);
-    if($res || ($id == 'admin' && $password == '123456')) {
+    if ($res || ($id == 'admin' && $password == '123456')) {
       $_SESSION['id'] = $id;
       return '{"status": 1, "msg": "Login Successfullyu!!"}';
     } else {
@@ -27,34 +26,33 @@ class EmployeeModel {
         return '{"status": 0, "msg": "Something went wrong please try again"}';
       }
     } else {
-      if ($db->exec("INSERT INTO emp VALUES(" . $db->quote($id) . ", " . $db->quote($name) . ", " . $db->quote($email) . ", " . $db->quote($mobile) . ", ".$db->quote($password).")")) {
+      if ($db->exec("INSERT INTO emp VALUES(" . $db->quote($id) . ", " . $db->quote($name) . ", " . $db->quote($email) . ", " . $db->quote($mobile) . ", " . $db->quote($password) . ")")) {
         return '{"status": 1, "msg": "User Created successfully!"}';
       } else {
         return '{"status": 0, "msg": "Something went wrong please try again"}';
       }
     }
   }
-  
-  public function getEmployee($empId) {
+
+  public function getEmployee($id) {
     $db = $this->getdb();
-    $tmp = $db->query("SELECT * from emp WHERE id = " . $db->quote($id));
+    $tmp = $db->query("SELECT id, name, email, mobile from emp WHERE id = " . $db->quote($id));
     $res = $tmp->fetch(PDO::FETCH_ASSOC);
-    if($res) {
-    return json_encode($res);
+    if ($res) {
+      return '{"status": 1, "msg": ' . json_encode($res) . '}';
     } else {
-      return '{"status": 0, "msg": "No Employess Found"}';
+      return '{"status": 0, "msg": "No Employe Found"}';
     }
   }
-  
-  
+
   public function getAllEmployes($empId) {
     $db = $this->getdb();
-    $tmp = $db->query("SELECT * from emp WHERE LIMIT 0,100");
-    $res = $tmp->fetch(PDO::FETCH_ASSOC);
-    if($res) {
-    return json_encode($res);
+    $tmp = $db->query("SELECT id, name, email, mobile from emp LIMIT 0,100");
+    $res = $tmp->fetchAll(PDO::FETCH_ASSOC);
+    if ($res) {
+      return '{"status": 1, "msg": ' . json_encode($res) . '}';
     } else {
-      return '{"status": 0, "msg": "No Employess Found"}';
+      return '{"status": 0, "msg": "No Employees Found"}';
     }
   }
 

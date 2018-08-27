@@ -20,9 +20,15 @@ class Bootstrap {
         require APP_PATH . '/controllers/index.php';
         echo (new Index())->saveEmp($_POST);
         break;
+      
       case 'getallemp':
         require APP_PATH . '/controllers/index.php';
-        echo (new Index())->saveEmp($_POST);
+        echo (new Index())->getAllEmployees();
+        break;
+      
+      case 'getemp':
+        require APP_PATH . '/controllers/index.php';
+        echo (new Index())->getEmployee();
         break;
       
       case "login":

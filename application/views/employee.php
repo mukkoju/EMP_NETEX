@@ -1,7 +1,9 @@
 <div class="dialog" ng-controller="EmployeeController as ec">
-    <!--<i class="oi oi-x" ng-click="cancle()"></i>-->
+    <button type="button" class="close" aria-label="Close" ng-click="cancle()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h2 class="subhead">{{emp.id ? emp.id : "New Employee"}}</h2>
     <form name="empform" ng-submit="saveEmp()" novalidate>
-        <h2 class="subhead">Employee</h2>
         <div class="form-group">
             <label for="id">Employee Id</label>
             <input type="text" class="form-control" id="id" name="id" ng-model="emp.id" required>

@@ -58,6 +58,15 @@ class Index extends Controller {
     require APP_PATH . '/models/employe.php';
     return (new EmployeeModel())->getAllEmployes();
   }
+  
+  public function getEmployee() {
+    if(!$this->hasSession())
+      return '{"status": 0, "msg": "session required"}';
+    
+    require APP_PATH . '/models/employe.php';
+    return (new EmployeeModel())->getEmployee($_POST['id']);
+  }
+  
 
   
   public function login($data) {

@@ -7,7 +7,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Admin
+                        <?= $_SESSION['id'] ?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/logout">Logout</a>
@@ -42,17 +42,7 @@
                 </div>
             </div>
             <div class="col-sm">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <i class="oi oi-task"></i>
-                    </div>
-                    <div class="card-footer">
-                        Assign Employee
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm">
-                <div class="card text-center">
+                <div class="card text-center" ng-click="showallEmp()">
                     <div class="card-body">
                         <i class="oi oi-people"></i>
                     </div>
@@ -61,6 +51,7 @@
                     </div>
                 </div>    
             </div>
+            
             <div class="col-sm">
                 <div class="card text-center">
                     <div class="card-body">
@@ -70,6 +61,17 @@
                         Submit Review
                     </div>
                 </div>    
+            </div>
+            
+            <div class="col-sm">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="oi oi-task"></i>
+                    </div>
+                    <div class="card-footer">
+                        Assign Employee
+                    </div>
+                </div>
             </div>
         </div>
     </div>

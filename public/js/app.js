@@ -115,35 +115,53 @@ app.controller('IndexController', ['$scope', 'apiService', '$controller', functi
 
 app.controller('Homecontroller', ['$scope', 'apiService', '$controller', function ($scope, apiService, $controller) {
         $controller('DialogController', {$scope: $scope});
+        $controller('ToastController', {$scope: $scope});
         $scope.emp = {};
-
-        $scope.updateEmp = function () {
-
-        };
 
         $scope.showEmp = function (tp, id) {
             if (tp == 'E') {
-                $scope.emp = {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'};
-                apiService.postData({tp: tp, id: id}, 'getemp').success(function (res) {
+                apiService.postData({id: id}, 'getemp').success(function (res) {
+                    if (res.status == '1') {
+                        $scope.emp = res.msg;
+                        $scope.loadDialog('application/views/employee.php');
+                    } else {
+                        $scope.showSimpleToast(res.msg);
+                    }
                 });
+            } else {
+                $scope.loadDialog('application/views/employee.php');
             }
-            $scope.loadDialog('application/views/employee.php');
         };
 
         $scope.allEmp = function () {
             apiService.postData({}, 'getallemp').success(function (res) {
-                $scope.emps = [{'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'},
-                    {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'},
-                    {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'},
-                    {'id': 'EMP01', 'name': 'Sathish Kumar', 'email': 'mukkojusatish@gmail.com', 'mobile': '9948983078'}];
+                if (res.status == '1') {
+                    $scope.emps = res.msg;
+                    $scope.loadDialog('application/views/allemp.php');
+                } else {
+                    $scope.showSimpleToast(res.msg);
+                }
             });
-            $scope.loadDialog('application/views/allemp.php');
+        };
+        
+        $scope.showallEmp = function () {
+            apiService.postData({}, 'getallemp').success(function (res) {
+                if (res.status == '1') {
+                    $scope.emps = res.msg;
+                    $scope.loadDialog('application/views/showallemp.php');
+                } else {
+                    $scope.showSimpleToast(res.msg);
+                }
+            });
+        };
+        
+        $scope.cancle = function () {
+            $scope.cancel();
         };
     }]);
 
 app.controller('EmployeeController', ['$scope', 'apiService', '$controller', function ($scope, apiService, $controller) {
         $controller('ToastController', {$scope: $scope});
-
         $scope.saveEmp = function () {
             apiService.postData({id: $scope.emp.id,
                 name: $scope.emp.name,
@@ -152,5 +170,9 @@ app.controller('EmployeeController', ['$scope', 'apiService', '$controller', fun
             }, 'saveemp').success(function (res) {
                 $scope.showSimpleToast(res.msg);
             });
+        };
+        
+        $scope.cancle = function () {
+            $scope.cancel();
         };
     }]);
