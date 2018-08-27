@@ -1,2 +1,5 @@
 # EMP_NETEX
-Task
+
+Login Credentials,
+username: admin,
+pwd: 123456
