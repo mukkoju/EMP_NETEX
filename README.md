@@ -11,9 +11,9 @@ pwd: 123456
 
 # Installation:
 
-1. Create the Database with name of 'netex'
-2. Import netex.sql file in to that which is in root 
-3. and go to library/Model.php update databade credential with your own
+1. Create the Database with name of 'netex'.
+2. Import netex.sql file into netex database. 
+3. Go to library/Model.php update databade credential with your own.
 
 
 
