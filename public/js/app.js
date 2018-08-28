@@ -172,6 +172,13 @@ app.controller('EmployeeController', ['$scope', 'apiService', '$controller', fun
             });
         };
         
+        $scope.deleteEmp = function (id) {
+            apiService.postData({id: id
+            }, 'deleteemp').success(function (res) {
+                $scope.showSimpleToast(res.msg);
+            });
+        };
+        
         $scope.cancle = function () {
             $scope.cancel();
         };

@@ -82,7 +82,15 @@ class Index extends Controller {
     exit();
   }
   
-  public function hasSession() {
+  public function deleteEmp() {
+    if(!$this->hasSession())
+      return '{"status": 0, "msg": "session required"}';
+    
+    require APP_PATH . '/models/employe.php';
+    return (new EmployeeModel())->deleteEmployee($_POST['id']);
+  }
+
+    public function hasSession() {
     if(empty($_SESSION['id']))
       return false;
     else

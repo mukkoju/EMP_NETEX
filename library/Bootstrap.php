@@ -31,6 +31,11 @@ class Bootstrap {
         echo (new Index())->getEmployee();
         break;
       
+      case 'deleteemp':
+        require APP_PATH . '/controllers/index.php';
+        echo (new Index())->deleteEmp();
+        break;
+      
       case "login":
         require APP_PATH . '/controllers/index.php';
         echo (new Index())->login($_POST);

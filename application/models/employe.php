@@ -55,6 +55,26 @@ class EmployeeModel {
       return '{"status": 0, "msg": "No Employees Found"}';
     }
   }
+  
+  public function writeReview($id) {
+    $db = $this->getdb();
+    $tmp = $db->query("SELECT id from emp WHERE id = " . $db->quote($id));
+    $res = $tmp->fetch(PDO::FETCH_ASSOC);
+    if ($res) {
+      
+    } else {
+      
+    }
+  }
+  
+  public function deleteEmployee($id) {
+    $db = $this->getdb();
+    if ($db->query("DELETE FROM emp WHERE id = " . $db->quote($id))) {
+      return '{"status": 1, "msg": "Deleted Successfully!!"}';
+    } else {
+      return '{"status": 0, "msg": "Something went wrong please try again"}';
+    }
+  }
 
   private function getdb() {
     return (new Model())->getDBConnection();
