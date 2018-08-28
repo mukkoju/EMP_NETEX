@@ -3,7 +3,7 @@
 Login Credentials
 ````
 ``` 
-username: admin,
+username: admin
 ````
 `````
 pwd: 123456
@@ -18,3 +18,22 @@ pwd: 123456
 
 
 
+#Features:
+
+1. Create Employee
+2. Edit Employee
+3. Delete Employee
+4. Login with employee id
+5. Handling Sessions.
+6. checking authentication for API calls
+7. View all employes with details
+8. Showing toast messages for status.
+
+#Stack
+1. HTML, CSS
+2. Javascritp
+3. AngularJs 1.4
+4. Bootstarap 4
+5. Icon set
+6. PHP
+7. MYSQL
