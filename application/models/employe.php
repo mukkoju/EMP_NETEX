@@ -57,7 +57,7 @@ class EmployeeModel {
   }
 
   private function getdb() {
-    return new PDO('mysql:host=localhost;dbname=netex', 'root', 'dambo');
+    return (new Model())->getDBConnection();
   }
 }
 
