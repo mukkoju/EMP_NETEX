@@ -16,9 +16,9 @@ pwd: 123456
 3. and go to library/Model.php update databade credential with your own
 
 
-````
 
-#Features:
+
+# Features:
 
 1. Create Employee
 2. Edit Employee
@@ -28,8 +28,8 @@ pwd: 123456
 6. checking authentication for API calls
 7. View all employes with details
 8. Showing toast messages for status.
-``````
-#Stack
+
+# Stack
 1. HTML, CSS
 2. Javascritp
 3. AngularJs 1.4
