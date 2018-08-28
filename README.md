@@ -16,7 +16,7 @@ pwd: 123456
 3. and go to library/Model.php update databade credential with your own
 
 
-
+````
 
 #Features:
 
@@ -28,7 +28,7 @@ pwd: 123456
 6. checking authentication for API calls
 7. View all employes with details
 8. Showing toast messages for status.
-
+``````
 #Stack
 1. HTML, CSS
 2. Javascritp
